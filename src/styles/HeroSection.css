@@ -27,13 +27,13 @@
 
 .hero-content {
 	position: relative;           /* so coin can absolutely position inside */
-	/* width: 225px;
-	height: 225px; */
+	width: 200px;
+	height: 200px;
 	padding: 1rem;
 	display: inline-block;
 	border: 3px solid #ffd700;    /* gold border (optional) */
 	border-radius: 8px;
-	background: url('../images/gold-block.webp') no-repeat center center;
+	background: url('../images/gold-block.webp') center/contain no-repeat;
 	background-size: cover;       /* Or use your own block texture */
 	margin-bottom: 30px;
   
@@ -140,9 +140,9 @@
 	/* Retro color palette (brownish) reminiscent of Mario’s bricks */
 	background: repeating-linear-gradient(
 	  45deg,
-	  #8B4513,         /* first color stop */
+	  #8B4513,       
 	  #8B4513 10px,
-	  #A0522D 10px,    /* second color stop */
+	  #A0522D 10px,   
 	  #A0522D 20px
 	);
 	color: #fff;
@@ -156,7 +156,7 @@
 	font-size: 0.7rem;  /* Press Start 2P typically looks best small */
   
 	/* Subtle shadow for retro pop */
-	box-shadow: 4px 4px 0px #000;  /* 2D pixel-like shadow */
+	box-shadow: 4px 4px 0px #000; 
   
 	cursor: pointer;
 	transition: transform 0.15s ease-in-out;
@@ -397,7 +397,7 @@
 	/* Mario brick texture example */
 	background: url('../images/mario-brick.png') center/cover no-repeat;
 	border: 4px solid #623b16; /* a dark brown border for extra pixel effect */
-	box-shadow: 4px 4px 0px #000;
+	box-shadow: none;
 	
 	display: flex;
 	align-items: center;
@@ -414,7 +414,52 @@
   
   /* The label inside the brick (download resume text) */
   .brick-label {
-	pointer-events: none; /* so clicks go through to the .download-brick container */
+	font-family: 'Press Start 2P', monospace;
+	font-size: 0.6rem;
+	color: #fff;
+	text-transform: uppercase;
+	pointer-events: none;
+  }
+
+  /* Stage 0 = no cracks */
+.crack-stage-0::after, .crack-stage-1::after, .crack-stage-2::after, .crack-stage-3::after {
+	content: "";
+	position: absolute;
+	top: 0; 
+	left: 0;
+	width: 100%; 
+	height: 100%;
+	pointer-events: none;
+  }
+  
+  /* Stage 0 has no cracks, so it's basically transparent overlay. */
+  .crack-stage-0::after {
+	background: transparent;
+  }
+  
+  /* Stage 1: small crack shape */
+  .crack-stage-1::after {
+	background: transparent; /* We will define shape with clip-path */
+	clip-path: polygon(30% 40%, 35% 45%, 45% 45%, 50% 50%, 47% 55%, 35% 55%, 30% 60%, 25% 60%, 25% 40%);
+	background-color: rgba(0, 0, 0, 0.7);
+  }
+  
+  /* Stage 2: bigger crack (maybe a second shape or expand the first) */
+  .crack-stage-2::after {
+	clip-path: polygon(
+	  15% 35%, 25% 40%, 35% 45%, 45% 45%, 50% 50%, 
+	  47% 55%, 35% 60%, 25% 65%, 15% 65%, 10% 50%
+	);
+	background-color: rgba(0, 0, 0, 0.7);
+  }
+  
+  /* If you want a third stage (crack-stage-3), more coverage: */
+  .crack-stage-3::after {
+	clip-path: polygon(
+	  10% 30%, 30% 40%, 45% 45%, 50% 50%, 45% 60%, 
+	  35% 65%, 25% 70%, 10% 70%, 5% 50%
+	);
+	background-color: rgba(0, 0, 0, 0.8);
   }
   
   /* Quick "hit" animation: a small shake or scale effect */
@@ -441,3 +486,10 @@
 		70% { transform: scale(1) rotate(5deg) translateY(-5px); opacity: 0.7; }
 		100% { transform: scale(0) rotate(0deg) translateY(-40px); opacity: 0; }
 	}
+
+	.coin-counter {
+		margin-top: 2rem;
+		font-family: 'Press Start 2P', monospace; /* optional pixel font */
+		color: #fff;
+		text-align: center;
+	  }

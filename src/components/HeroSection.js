@@ -28,11 +28,14 @@ const HeroSection = () => {
   const [coinVisible, setCoinVisible] = useState(false);
 
   // Random number of hits needed to break (2-5, for example)
-  const [hitsNeeded] = useState(() => Math.floor(Math.random() * 8) + 4);
+  const [hitsNeeded] = useState(() => Math.floor(Math.random() * 4) + 2);
   const [hitCount, setHitCount] = useState(0);
 
   // Track the "breaking" animation state
-  const [isBreaking, setIsBreaking] = useState(false);  
+  const [isBreaking, setIsBreaking] = useState(false);
+  
+  // State for counters
+  const [coinCount, setCoinCount] = useState(0);
 
   useEffect(() => {
     const unlockAudio = () => {
@@ -137,10 +140,10 @@ const HeroSection = () => {
       return newCount;
     });
 
-	if (!isBreaking) {
-		setHitAnim(true);
-		setTimeout(() => setHitAnim(false), 300);
-	}
+    if (!isBreaking) {
+      setHitAnim(true);
+      setTimeout(() => setHitAnim(false), 300);
+    }
   };
 
   const handleCoinBlockClick = () => {
@@ -150,10 +153,10 @@ const HeroSection = () => {
         console.log("Audio context resumed for coin block!");
       });
     }
-	setBlockPressed(true);
+	  setBlockPressed(true);
     playSound(coinSound);    // play the coin sound
-
     setCoinVisible(true); // show the coin sprite
+    setCoinCount(coinCount + 1);
 
     // After 1 second (matching coinJump duration), hide coin
     setTimeout(() => {
@@ -163,6 +166,9 @@ const HeroSection = () => {
 		setBlockPressed(false);
 	}, 300);
   };
+
+  const maxCrackStages = hitsNeeded - 1;     // e.g. if hitsNeeded=4, we have 3 stages
+  let crackStage = Math.min(hitCount, maxCrackStages); 
 
   const links = [
     { id: 1, url: "https://www.linkedin.com/in/navkar-j-1b7594110/", icon: linkedin_icon },
@@ -203,28 +209,28 @@ const HeroSection = () => {
         <AiOutlineArrowUp />
       </motion.div>
 
-	<div className={`hero-content ${blockPressed ? "block-pressed" : ""}`} 
-	onClick={handleCoinBlockClick}>
-        {coinVisible && (
-          <div className="coin" style={{ animation: "coinJump 1s forwards" }} />
-        )}
+	    <div className={`hero-content ${blockPressed ? "block-pressed" : ""}`} 
+	      onClick={handleCoinBlockClick}>
+          {coinVisible && (
+            <div className="coin" style={{ animation: "coinJump 1s forwards" }} />
+          )}
 
-        {/* Two rows of text in pixel font, color black */}
-        <p className='hero-intro'>Navkar Jain</p>
-        <p className='hero-desc'>
-          <span className='hero-desc-sub'>AI/ML Enthusiast</span>
-        </p>
+          {/* Two rows of text in pixel font, color black */}
+          <p className='hero-intro'>Navkar Jain</p>
+          <p className='hero-desc'>
+            <span className='hero-desc-sub'>AI/ML Enthusiast</span>
+          </p>
       </div>
 
-		<div 
-			className={`download-brick ${hitAnim ? 'hit-animation' : ''} ${isBreaking ? 'breaking' : ''}`}
-			onClick={handleBrickClick}
-      	>
-			<span className="brick-label">DOWNLOAD<br/>RESUME</span>
-		</div>
+		  <div 
+        className={`download-brick crack-stage-${crackStage} ${hitAnim ? 'hit-animation' : ''} ${isBreaking ? 'breaking' : ''}`}
+        onClick={handleBrickClick}
+          >
+        <span className="brick-label">DOWNLOAD<br/>RESUME</span>
+      </div>
 
       <motion.span variants={contactVariants} initial='hidden' whileInView='visible'>
-	  <ul className='hero-nav-links'>
+        <ul className='hero-nav-links'>
           {links.map((link, index) => {
             const isBreaking = breakingBlocks[index] ? "breaking" : "";
             const isBroken = brokenBlocks[index] ? "broken" : "";
@@ -258,6 +264,11 @@ const HeroSection = () => {
           })}
         </ul>
       </motion.span>
+    
+      {/* Display coin count & unique users at the bottom */}
+      <div className="coin-counter">
+        <p>Total Coins Collected: {coinCount}</p>
+      </div>      
     </div>
   );
 };

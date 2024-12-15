@@ -1,5 +1,5 @@
 <div align="center">
-	<h1> My Portfolio </h1>
+	<h1> Portfolio in a retro theme </h1>
 </div>
 
 
@@ -10,13 +10,13 @@ Follow these steps to run My Portfolio in your local machine.
 ### Clone this repository
 
 ```bash
-git clone https://github.com/navkar98/portfolio.git
+git clone https://github.com/navkar98/portfolio-retro-theme.git
 ```
 
 ### Navigate to directory
 
 ```bash
-cd portfolio
+cd portfolio-retro-theme
 ```
 
 ### Install NPM
