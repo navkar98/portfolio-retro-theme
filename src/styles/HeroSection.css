@@ -27,8 +27,8 @@
 
 .hero-content {
 	position: relative;           /* so coin can absolutely position inside */
-	width: 200px;
-	height: 200px;
+	/* width: 200px;
+	height: 200px; */
 	padding: 1rem;
 	display: inline-block;
 	border: 3px solid #ffd700;    /* gold border (optional) */
