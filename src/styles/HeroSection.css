@@ -1,0 +1,443 @@
+@import url("https://fonts.googleapis.com/css2?family=Source+Sans+Pro&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+/* Hero Section */
+.hero-section {
+    background-image: url("../images/05uhd2ihjs671.gif"); /* Retro GIF background */
+    background-attachment: fixed;
+    background-position: center;
+    background-size: cover;
+    width: 100%;
+    color: var(--white);
+    height: 100vh;
+    padding: 3rem 6rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    position: relative;
+    text-shadow: 2px 2px 5px #000000; /* Glow effect for text */
+}
+.hero-overlay {
+    position: absolute;
+    height: 100vh;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.6);
+}
+
+.hero-content {
+	position: relative;           /* so coin can absolutely position inside */
+	/* width: 225px;
+	height: 225px; */
+	padding: 1rem;
+	display: inline-block;
+	border: 3px solid #ffd700;    /* gold border (optional) */
+	border-radius: 8px;
+	background: url('../images/gold-block.webp') no-repeat center center;
+	background-size: cover;       /* Or use your own block texture */
+	margin-bottom: 30px;
+  
+	/* Center the text inside the block */
+	opacity: 0.85;                   /* partial transparency */
+	display: flex;
+	flex-direction: column;          /* intro + desc stack vertically */
+	align-items: center;
+	justify-content: center;
+
+	background-color: rgba(255, 215, 0, 0.3);
+    background-blend-mode: overlay;
+  
+	/* Shiny effect (loop) */
+	animation: shinyBlock 5s infinite ease-in-out;
+	cursor:pointer;
+  }
+
+  .block-pressed {
+	animation: pressBlock 0.3s forwards;  /* runs once */
+  }
+
+  @keyframes pressBlock {
+	0% {
+	  transform: scale(1);
+	  filter: brightness(1);
+	}
+	50% {
+	  transform: scale(0.9);
+	  filter: brightness(2);
+	}
+	100% {
+	  transform: scale(1);
+	  filter: brightness(1);
+	}
+  }
+  
+  @keyframes shinyBlock {
+	0%, 80% {
+	  filter: brightness(1);
+	}
+	90% {
+	  filter: brightness(2);
+	}
+	100% {
+	  filter: brightness(1);
+	}
+  }
+  
+  /* The coin sprite (hidden by default). We'll animate it on click. */
+  .coin {
+	position: absolute;
+	bottom: 5px;
+	left: 50%;
+	transform: translateX(-50%);
+	width: 32px;
+	height: 32px;
+	background: url('../images/coin.png') no-repeat center center;
+	background-size: contain;
+	pointer-events: none;
+	/* visibility: hidden; */
+	z-index: 9999;  /* ensure coin is on top of block */
+  }
+  
+  /* The coin jump animation */
+  @keyframes coinJump {
+	0% {
+	  bottom: 80px;
+	  opacity: 1;
+	}
+	30% {
+	  bottom: 120px;  /* coin above block */
+	}
+	60% {
+	  bottom: 150px; /* higher peak if you prefer */
+	}
+	100% {
+	  bottom: 200px; /* moves further up */
+	  opacity: 0;    /* fade out at the end */
+	}
+  }
+  
+
+.hero-intro {
+    font-family: 'Press Start 2P';
+	color: #000;             /* black text */
+	margin: 0.5rem 0;        /* spacing between rows */
+	text-align: center;
+}
+
+.hero-desc,
+.hero-desc-sub {
+    font-family: 'Press Start 2P';
+  	color: #000;
+}
+
+.hero-contact {
+	font-family: 'Press Start 2P', monospace;  /* Pixel font */
+	text-decoration: none;
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	
+	/* Retro color palette (brownish) reminiscent of Mario’s bricks */
+	background: repeating-linear-gradient(
+	  45deg,
+	  #8B4513,         /* first color stop */
+	  #8B4513 10px,
+	  #A0522D 10px,    /* second color stop */
+	  #A0522D 20px
+	);
+	color: #fff;
+	
+	/* Thick, blocky border with pixel color */
+	border: 4px solid #FFD700; /* gold-ish border, reminiscent of coin color */
+	border-radius: 0;          /* no rounding => more pixelated feel */
+	
+	/* Padding to make it feel more button-like */
+	padding: 0.8rem 1.2rem;
+	font-size: 0.7rem;  /* Press Start 2P typically looks best small */
+  
+	/* Subtle shadow for retro pop */
+	box-shadow: 4px 4px 0px #000;  /* 2D pixel-like shadow */
+  
+	cursor: pointer;
+	transition: transform 0.15s ease-in-out;
+
+	margin-bottom: 30px;
+  }
+  
+  /* Hover: slight upward movement and a color shift or a bright border */
+  .hero-contact:hover {
+	transform: translate(-2px, -2px);
+	box-shadow: 6px 6px 0px #000;
+	border-color: #FFEA00; /* bright gold on hover */
+  }
+  
+  /* For the download icon spacing */
+  .cv-icon {
+	margin-left: 0.5rem;
+  }
+  
+  .hero-contact::before {
+	content: "";
+	display: inline-block;
+	background: url('../images/pixel-mushroom.png') no-repeat center / contain;
+	width: 24px;
+	height: 24px;
+	margin-right: 8px;
+  }
+  
+
+.menu-icon,
+.to-top-icon {
+    padding: 0.7rem;
+    cursor: pointer;
+    font-size: 1.3rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 3px solid #ff00ff; /* Neon magenta */
+    border-radius: 50%;
+    transition: all 0.4s ease;
+    z-index: 99999999;
+    background-color: #00ffff; /* Neon aqua */
+}
+
+.menu-icon {
+	position: fixed;
+	top: 1rem;
+	left: 1rem;
+}
+
+.menu-icon:hover,
+.to-top-icon:hover {
+    background-color: #ff4500; /* Retro orange */
+}
+
+.cv-icon {
+    margin-left: 0.5rem;
+}
+
+.to-top-icon {
+    position: fixed;
+    bottom: 1rem;
+    right: 1rem;
+}
+
+.show {
+    visibility: visible;
+    opacity: 1;
+}
+
+.hide {
+    visibility: hidden;
+    opacity: 0;
+}
+
+@media screen and (max-width: 768px) {
+    .menu-icon,
+    .to-top-icon {
+        font-size: 1rem;
+    }
+}
+
+@media screen and (max-width: 650px) {
+    .hero-intro {
+        font-size: 5rem;
+    }
+}
+
+@media screen and (max-width: 500px) {
+    .hero-section {
+        padding: 3rem 1rem;
+        white-space: normal;
+    }
+
+    .hero-intro {
+        font-size: 3rem;
+    }
+
+    .hero-desc,
+    .hero-desc-sub {
+        font-size: 1rem;
+    }
+
+    .hero-contact {
+        font-size: 90%;
+    }
+
+    .menu-icon,
+    .to-top-icon {
+        font-size: 1rem;
+        padding: 0.6rem;
+        background-color: #ff4500;
+    }
+}
+/* ../images/pixelated_block.webp */
+
+/* Hero Nav Links Container */
+.hero-nav-links {
+	display: flex;
+	justify-content: center;
+	gap: 2rem; /* Spacing between each li */
+	padding: 0;
+	margin: 0;
+	list-style: none;
+  }
+  
+  /* Each <li> is just a container for the block + link. */
+  .hero-nav-links li {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+  }
+  
+  /* .block-wrapper: The question block + Mario. */
+  .block-wrapper {
+	position: relative;
+	width: 40px;
+	height: 40px;
+	background: url('../images/pixelated_block.webp') no-repeat center center;
+	background-size: cover;
+	cursor: pointer;
+	transition: transform 0.1s ease-in-out;
+  }
+  
+  /* Slight bounce on hover */
+  .block-wrapper:hover {
+	transform: translateY(-2px);
+  }
+  
+  /* Mario sprite (initially hidden) */
+  .block-wrapper .mario {
+	position: absolute;
+	bottom: -70px; 
+	left: 50%;
+	transform: translateX(-50%);
+	width: 30px;
+	height: 30px;
+	background: url('../images/mario-jump.png') no-repeat center center;
+	background-size: contain;
+	visibility: hidden;
+	animation: none;
+  }
+  
+  /* Link wrapper (hidden by default) */
+  .link-wrapper {
+	margin-top: 0.5rem;
+	opacity: 0;
+	transform: scale(0);
+	transition: transform 0.5s ease, opacity 0.5s ease;
+	pointer-events: none;
+  }
+  
+  /* The actual link icon image. Optionally set sizing. */
+  .link-wrapper .icon {
+	width: 32px;
+	height: 32px;
+  }
+  
+  /* Breaking animation triggers the block break + Mario jump. */
+  .block-wrapper.breaking .mario {
+	visibility: visible; /* Show Mario */
+	animation: marioJump 1s ease-in-out forwards;
+  }
+  .block-wrapper.breaking {
+	animation: blockBreak 1s ease-in-out forwards;
+  }
+  
+  /* Once "broken", the block disappears and the link reveals. */
+  .block-wrapper.broken {
+	background: none;
+	cursor: default;
+	/* You could also set pointer-events: none; if you like. */
+  }
+  
+  /* Reveal link when broken. */
+  .link-wrapper.revealed {
+	opacity: 1;
+	transform: scale(1);
+	pointer-events: auto;
+	/* background-color: #ffff00; */
+  }
+  
+  /* Mario Jump Animation */
+  @keyframes marioJump {
+	0% {
+	  bottom: -70px;
+	}
+	50% {
+	  bottom: -20px; /* hits the block */
+	}
+	100% {
+	  bottom: -70px;
+	}
+  }
+  
+  /* Block Break Animation */
+  @keyframes blockBreak {
+	0% {
+	  transform: translateY(-2px);
+	}
+	40% {
+	  transform: translateY(-10px) scale(1.1);
+	}
+	100% {
+	  transform: translateY(-10px) scale(0);
+	  opacity: 0;
+	}
+  }
+
+/* The main container for your 'Download Brick' */
+.download-brick {
+	position: relative;
+	width: 120px;
+	height: 120px;
+	cursor: pointer;
+	margin-bottom: 30px;
+	
+	/* Mario brick texture example */
+	background: url('../images/mario-brick.png') center/cover no-repeat;
+	border: 4px solid #623b16; /* a dark brown border for extra pixel effect */
+	box-shadow: 4px 4px 0px #000;
+	
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	text-align: center;
+  
+	/* Pixel font styling for label */
+	font-family: 'Press Start 2P', monospace;
+	font-size: 0.5rem;  /* small pixel text */
+	color: #fff;
+	text-transform: uppercase;
+	line-height: 1.2;
+  }
+  
+  /* The label inside the brick (download resume text) */
+  .brick-label {
+	pointer-events: none; /* so clicks go through to the .download-brick container */
+  }
+  
+  /* Quick "hit" animation: a small shake or scale effect */
+  .hit-animation {
+	animation: brickHit 0.3s forwards;
+  }
+  
+  @keyframes brickHit {
+	0% { transform: scale(1) rotate(0deg); filter: brightness(1); }
+	50% { transform: scale(0.7) rotate(-10deg); filter: brightness(1.5); }
+	100% { transform: scale(1) rotate(0deg); filter: brightness(1); }
+  }
+  
+  /* The final break animation */
+  .breaking {
+	animation: brickBreak 1s forwards;
+  }
+  
+  /* This gives a more violent “shatter” effect. */
+	@keyframes brickBreak {
+		0% { transform: scale(1); opacity: 1; }
+		20% { transform: scale(1.1) rotate(5deg); }
+		50% { transform: scale(0.8) rotate(-10deg) translateY(-10px); }
+		70% { transform: scale(1) rotate(5deg) translateY(-5px); opacity: 0.7; }
+		100% { transform: scale(0) rotate(0deg) translateY(-40px); opacity: 0; }
+	}
